@@ -10,9 +10,10 @@ int main(){
 		cout << "1. 添加任务" << endl;
 		cout << "2. 查看任务" << endl;
 		cout << "3. 删除任务" << endl;
-		cout << "4. 退出" << endl;
+		cout << "4. 完成任务" << endl;
+		cout << "5. 退出" << endl;
 		cin>>choice;
-		if(choice==4){break;}
+		if(choice==5){break;}
 		else if(choice==1){
 			manager.addTask();
 		}
@@ -21,6 +22,9 @@ int main(){
 		}
 		else if(choice==3){
 			manager.deleteTask();
+		}
+		else if(choice==4){
+			manager.finishTask();
 		}
 	}
 	return 0;
