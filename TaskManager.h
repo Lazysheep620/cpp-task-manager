@@ -10,6 +10,8 @@ private:
 	
 	void saveTasks();
 	void loadTasks();
+	bool isValidIndex(int number);
+	bool getInput(int& choice);
 public:
 	TaskManager();
 	
@@ -17,6 +19,8 @@ public:
 	void showTasks();
 	void deleteTask();
 	void finishTask();
+	void showStatistics();
+	
 };
 #endif
 

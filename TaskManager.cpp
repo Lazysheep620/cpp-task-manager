@@ -34,6 +34,9 @@ void TaskManager::loadTasks(){
 	}
 	inputFile.close();
 }
+bool TaskManager::isValidIndex(int number){
+	return number >= 1 && number <= tasks.size();
+}
 TaskManager::TaskManager(){
 	loadTasks();
 }
@@ -80,15 +83,46 @@ void TaskManager::deleteTask(){
 void TaskManager::finishTask(){
 	int number;
 	cout<<"请输入任务编号:";
-	cin>>number;
-	if(number<1||number>tasks.size()){
-		cout<<"编号错误！";
+	if(!getInput(number)){
+		cout<<"请输入数字！"<<endl;
+		return;
 	}
-	else{
+	if(!isValidIndex(number)){
+		cout<<"编号错误！"<<endl;
+		return;
+	}
 	tasks[number-1].finish();
 	saveTasks();
-	cout<<"操作成功！";
-	}
+	cout<<"操作成功！"<<endl;
 }
-
+void TaskManager::showStatistics()
+{   if(tasks.empty())
+	{
+		cout << "暂无任务" << endl;
+		return;
+	}	
+	int finishedCount = 0;	
+	for(int i = 0; i < tasks.size(); i++)
+	{
+		if(tasks[i].isFinished())
+		{
+			finishedCount++;
+		}
+	}	
+	int total = tasks.size();
+	int unfinishedCount = total - finishedCount;	
+	cout << "=====任务统计=====" << endl;
+	cout << "总任务：" << total << endl;
+	cout << "已完成：" << finishedCount << endl;
+	cout << "未完成：" << unfinishedCount << endl;
+}
+bool TaskManager::getInput(int& choice){
+	cin >> choice;
+	if(cin.fail()){
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		return false;
+	}
+	return true;
+}
 
